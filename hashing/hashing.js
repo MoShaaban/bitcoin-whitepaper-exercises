@@ -44,7 +44,23 @@ function createBlock(_data) {
 	console.log(block);
 };
 
-// console.log(`Blockchain is valid: ${verifyChain(Blockchain)}`);
+function verifyChain(Blockchain){
+	for (let i = 0; i < Blockchain.blocks.length; i++){
+		let b = Blockchain.blocks[i];
+		let pervB = Blockchain.blocks[i - 1];
+		if(i === 0 && b.index === 0 && b.hash == "000000"){
+			return true;
+		}else if (b.data && b.prevHash && b.prevHash === pervB.hash && b.index === pervB.index + 1 && b.hash === blockHash(b)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+}
+
+
+
+ console.log(`Blockchain is valid: ${verifyChain(Blockchain)}`);
 
 
 // **********************************
